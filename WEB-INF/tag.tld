@@ -1,0 +1,49 @@
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+
+    <tlib-version>1.0</tlib-version>
+
+
+    <tag>
+
+        <name>printdate</name>
+        <tag-class>custometags.CurrentDateTag</tag-class>
+        <body-content>empty</body-content>
+
+    </tag>
+
+    <tag>
+    
+        <name>createtable</name>
+        <tag-class>custometags.TagsWithAttribute</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <name>rows</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+        </attribute>
+
+        <attribute>
+            <name>columns</name>
+            <required>false</required>
+            <rtexpervalue>false</rtexpervalue>
+        </attribute>
+
+    </tag>
+
+    <tag>
+       <name>showbody</name>
+       <tag-class>custometags.TagWithBody</tag-class>
+       <body>scriptless</body>        
+    </tag>
+
+    <tag>
+        <name>manipulatebody</name>
+        <tag-class>custometags.ManipulatingBody</tag-class> 
+        <body-content>scriptless</body-content>
+    </tag>
+
+</taglib>
