@@ -30,7 +30,7 @@ public class CurrentDateTag extends SimpleTagSupport {
     // then container doTag() ko call karega
 
     @Override 
-    public void doTag() throws JspException, IOException, IOException{
+    public void doTag() throws JspException, IOException{
 
         JspContext context = super.getJspContext();
         JspWriter out = context.getOut();

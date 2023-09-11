@@ -1,9 +1,14 @@
 <web-app>
 
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
     <context-param>
         <param-name>name</param-name>
         <param-value>Coder Sandeep Patel</param-value>
     </context-param>
+
     <listener>
         <listener-class>MyListener</listener-class>
     </listener>
@@ -68,6 +73,10 @@
         <servlet-class>AddMoreContentServlet</servlet-class>
         <servlet-name>AddMoreContentServlet</servlet-name>
     </servlet>
+    <servlet>
+        <servlet-name>ServletUsingServletInterface</servlet-name>
+        <servlet-class>ServletUsingServletInterface</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>HttpServletEx1</servlet-name>
@@ -125,5 +134,8 @@
         <servlet-name>AddMoreContentServlet</servlet-name>
         <url-pattern>/AddMoreContentServlet</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>ServletUsingServletInterface</servlet-name>
+        <url-pattern>/servlet-using-servlet-interface</url-pattern>
+    </servlet-mapping>
 </web-app>

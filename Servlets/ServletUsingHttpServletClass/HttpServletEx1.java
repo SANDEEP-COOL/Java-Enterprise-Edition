@@ -1,3 +1,11 @@
+// IMP 
+// HttpServlet class extends to GenericServlet class
+// 1 HttpServlet class is used to support different types of http request 
+// 2 it supports the http protocall 
+// 3 we can create our class and extends to HttpServlet class and here we only need to required method like doGet, doPost, doPut 
+
+
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
