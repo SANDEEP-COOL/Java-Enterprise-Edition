@@ -1,0 +1,84 @@
+1. The motive of custome tags is that , we wanna reduce the usage of java code in the JSP page.
+2. We have some technologies like Java Beans or Expression Language but still for processing the Logic we need it.
+3. For implementing Custome Tag we must create a class called Tag Handler , and a TLD file , and a tag in jsp page.
+4. So whenever Container reads a jsp page and encounters a custome tag , then it called to Tag Handler class methods.
+5. For creating a Tag Handler , JSP provides us some special set of methods which are availible in some interfaces and 
+   classes and these interfaces are avalible in javax.servlet.jsp.tagext package.
+6. Following are some important Interfaces and Classes.
+   a - Tag(Interface) : This is the top level interface, provides us two methods called doStartTag() and doEndTag() called by 
+                        Container when it encounters customer tags.
+    
+   b - IterationTag(Interface) : This is child interface of Tag interface and provides us a methods called doAfterBody() which
+                                 allows us to apply looping over our tag.
+
+   c - BodyTag(Interface) : This is child interface of IterationTag interface and provides us a method called doInitBody() 
+                            allows us to acces the body of custome tag.
+
+   d - TagSupport(Class) : This class implements to IterationTag interface and works as a helper class while developing our 
+                           tag handles class.
+
+   e - BodyTagSupport(Class) : This class implements to BodyTag Interface also extends TagSupport class and can be used by 
+                               tag handler which have to interact with the body of the tag.
+
+7. From JSP 2.0 , Sun introduced simple tags
+
+8. simple tags allow us to create custom tags and it is easier to implement.
+
+9. Moreover that is the reason they are called simple tags.
+
+10. The handeling of Simple Tags contains 3 steps.
+    a - create of it's object.
+    b - initialization of attibutes.
+    c - overriding of doTag().
+
+    container will create Simple Tags object and will initialize it's attribute , then only thing we need to do is to create 
+    doTag().
+
+12. SimpleTag(Interface) : This interface provides easier way of implementing tag handler. it is different from classic tag handler 
+                           instead of supporting the doStartTag() , doEndTag() etc... it simply provide us a method which 
+                           is doTag.which is called once and only once for any given tag invocation.
+
+                           it allows us to perform all the logic like iteration, evalution etc.
+
+                           and all these can be implemented inside a single methods that it is simple tag handler.
+
+11. SimpleTagSupport(Class) : This class implements to SimpleTag interface and it provides implementation of doTag().
+
+12. Syntax - 
+    public class myTag extends SimpleTagSupport {
+
+        public void doTag() throws JspException,IOException {
+
+            logic...
+
+        }
+
+    }
+
+13. Life Cycle of simpe tag 
+    a - A new tag handler object is created whenever container encounters a simple tag in our jsp page.
+    b - The container calls setJspContext() of this class so that we can get JspContext object.
+    c - Then container calls setters to apply attributes on the tag.
+    d - If the body exist then container calls the setJspBody() to set body of the tag as a JspFragement.
+    e - Then container calls doTag() , which carries out all the logic.
+
+14. In jsp we get a built in object called out of JspWriter using which we can generate output to browser.
+
+15. But in simple tag we need to call two methods to get JspWriter object.
+        a - the method getJspContext() to get JspContext object.
+        b - the method getOut() of JspContext object which returns us an object if JspWriter.
+
+
+---------------------------------------------------------------------------------------------------------------------------
+
+16. Simple Tag with attributes
+    a - Provide data members as well as their setters.
+    b - Inside TLD file inside tag tag , provide one more tag called attribute.
+    c - Write the jsp page using attribute.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+17. Simple tag with body 
+    a - However whatever we write in simple tag's body gets pasted inside a special buffer called JspFragement by container.
+    b - So if we want to display body of simple tag then we need to access the JspFragement object inside tag handler.
+    c - We access JspFragement object using getJspBody() , and then we can execute it using invoke() of JspFragement.
