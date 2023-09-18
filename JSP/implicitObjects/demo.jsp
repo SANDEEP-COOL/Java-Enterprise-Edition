@@ -8,7 +8,7 @@
         <!-- predefined object - we don't need to import these object, they are preimported -->
         <%
         
-            // obj1 - out
+            // obj1 - out - it is a reference of JspWriter object
             out.println("out is first object inside jsp page");
 
             //obj - 2
