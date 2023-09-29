@@ -22,7 +22,10 @@ public class Transaction {
             // will be cause of exception 
             st.executeUpdate("inserted into books (bookname, subject, bookprice) values ('learnWining1', 'wining1', 1500)");
 
-            // if there is no erro 
+            // if both are correct
+            st.executeBatch();
+            
+            // if there is no error
             con.setAutoCommit(true);
 
 
