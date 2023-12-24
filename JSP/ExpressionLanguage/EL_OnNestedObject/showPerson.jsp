@@ -25,9 +25,7 @@
                 <p>DogName : <strong>${requestScope.person.dog.name}</strong></p>
                 <p>DogAge : <strong>${requestScope.person.dog.breed}</strong></p>
 
-
             </div>
-
 
         </div>
 

@@ -77,7 +77,31 @@
         <servlet-name>ServletUsingServletInterface</servlet-name>
         <servlet-class>ServletUsingServletInterface</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>sandeep</servlet-name>
+        <servlet-class>fetch_info.FetchClientInfoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>demo</servlet-name>
+        <servlet-class>fetch_info.Demo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servletHandelingCookie</servlet-name>
+        <servlet-class>Cookies.Servlet1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servletHandelingCookie1</servlet-name>
+        <servlet-class>Cookies.Servlet2</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>servletHandelingCookie1</servlet-name>
+        <url-pattern>/servlet2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletHandelingCookie</servlet-name>
+        <url-pattern>/servlet1</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HttpServletEx1</servlet-name>
         <url-pattern>/HttpServletEx1</url-pattern>
@@ -137,5 +161,13 @@
     <servlet-mapping>
         <servlet-name>ServletUsingServletInterface</servlet-name>
         <url-pattern>/servlet-using-servlet-interface</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sandeep</servlet-name>
+        <url-pattern>/FetchClientInfoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>demo</servlet-name>
+        <url-pattern>/Demo</url-pattern>
     </servlet-mapping>
 </web-app>

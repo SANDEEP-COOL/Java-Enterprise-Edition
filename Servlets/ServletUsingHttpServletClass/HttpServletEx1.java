@@ -26,6 +26,7 @@ public class HttpServletEx1 extends HttpServlet {
                 "Current Date is "+d+
             "</h1>"
         );
+        // pw.println(super.getServletInfo()+"*****");
         pw.close();
 
     }

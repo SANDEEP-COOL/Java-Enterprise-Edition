@@ -16,6 +16,7 @@
 
             String s2 = "laychi patel";
             session.setAttribute("s2", s2);
+            
         %>
 
         <p>String s : <strong>${requestScope.s}</strong></p>
