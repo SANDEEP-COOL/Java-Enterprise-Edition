@@ -1,0 +1,331 @@
+#1. ALIASING
+#AS 
+select first_name AS worker_name from worker;
+
+#2. UPPER CASE , POST PROCESSING
+#UPPER()
+select UPPER(first_name) from worker;
+
+#3. UNIQUE
+#DISTINCT
+select distinct department from worker;
+
+#GROUP BY 
+#DISTINCT 
+#USING GROUP BY WITHOUT AGGREGATION FUNCTION WORKS LIKE DISTINCT KEYWORD
+select department from worker GROUP BY department 
+
+#4.SUBSTRING(column_name , STARTING , ENDING)
+select SUBSTRING(column_name , 1 , 3) from worker 
+
+#5. FINDING POSITION 
+#CASE INSENSITIVE
+#INSTR(column_name , character)
+select INSERT(column_name , 'B') from worker where first_name = 'Amitabh';
+
+#6. TRAILING WHITE SPACE FROM RIGHT SIDE 
+#RTRIM(column_name)
+select RTRIM(first_name) from worker;
+
+#7. TRAILING WHITE SPACE FROM LEFT SIDE 
+#LTRIM(column_name)
+select LTRIM(first_name) from worker;
+
+#8. DISTINCT + LENGTH 
+select distinct department , length(department) from worker
+SELECT length(department) from worker group by department;
+
+#9. REPLACE A CHARACTER BY ANOTHER CHARACTER 
+LENGTH(column_name , first_char , second_char)
+select REPLACE(first_name , 'a' , 'A') from worker;
+
+#10. CONCATINATION 
+CONCAT(pair of strings) 
+select CONCAT(first_name , ' ' , last_name) from worker;
+#WITH ALIASING 
+select CONCAT(first_name , ' ', last_name) AS compelete_name from worker;
+
+#11. ORDER BY , ASCENDING
+WORKER ALL DETAILS WHILE MAINTAING ASCENDING ORDER OF FIRST_NAME
+select * from worker ORDER BY first_name ASC 
+
+#12. PRINT ALL WORKER DETAILS FROM WORKER TABLE ORDER BY FIRST_NAME ASCENDING AND DEPARTMENT DESCENDING
+
+
+#13. OR 
+select * from worker_details where first_name = 'vipul' OR last_name = 'satish';
+select * from worker_details where first_name IN('vipul' , 'satish');
+
+#14. EXCLUDING
+IT WILL GIVE ALL THE WORKERS EXCLUDING VIPUL AND SATISH
+select * from worker where first_name NOT IN ('vipul' , 'satish');
+
+#15. LIKE
+WILDCARD
+select * from worker where department LIKE 'admin%';
+
+#16 LIKE
+CONTAINS
+select * from worker where first_name LIKE '%a%';
+
+#17 LIKE
+LAST ME A HONA CHAHIYE
+select * from worker where first_name LIKE '%a';
+
+#18 LIKE
+fixed SIX characters
+select * from worker where first_name LIKE '_____%';
+
+#19 BETWEEN
+INCLUSIVE
+select * from worker where salary BETWEEN 100000 AND 500000;
+
+#20 YEAR , MONTH
+select * from worker where YEAR(JOINING_DATE) = 2014 AND MONTH(JOINING_DATE) = 02;
+
+#21 COUNT
+select COUNT(*) from worker where departemnt = 'ADMIN';
+
+#22
+select CONCAT(first_name , ' ', last_name) from worker where salary between 100000 AND 500000;
+
+#23
+This SQL query is saying, "Group the workers in the worker table by their DEPARTMENT, and for each group, count how many workers belong to that department."
+select department , count(*) from worker GROUP BY department;
+select department , count(*) from worker GROUP BY department ORDER BY count(*) desc;
+
+#24
+INNER JOIN
+select * from worker AS w INNER JOIN title AS t ON w.worker_id = t.worker_ref_id where t.worker_title = 'manager';
+select w.* from worker as w INNER JOIN title AS t ON w.worker_id = t.worker_ref_id where t.worker_title = 'manager';
+
+#25
+HAVING
+select worker_title , count(*) from title GROUP BY worekr_title HAVING count(*) > 1;
+
+#26
+ODD ROWS
+select * from worker where MOD(worker_id , 2) != 0;
+
+#27
+CLONING
+THIS QUERY WILL CLONE SCHEMA + DATA INTO NEW1
+create table new1(select * from worker);
+
+#LIKE
+#THIS QUERY WILL FIRST CLONE SCHEMA ONLY 
+create table new1 LIKE worker 
+#NOW INSERTING DATA
+insert into new1 select * from worker 
+
+#29
+INTERSACTING RECORDS
+select * from worker INNER JOIN new_table USING(worker_id);
+
+#30
+MINUS , INTERSACTION
+select e.* from employee as e LEFT JOIN new_table as n ON e.id = n.worker_id WHERE n.worker_id is null.
+
+#31
+CURRENT DATA , TIME
+select curdate();
+select now();
+
+#32
+LIMIT , TOP N RECORDS 
+select * from worker ORDER BY salary DESC LIMIT 5;
+
+#33
+LIMIT , nth ITEM , 5th item
+select * from worker ORDER BY salary desc LIMIT 4,1;
+
+#35
+WHERE
+select w1.* from worker w1, worker w2 WHERE w1.salary = w2.salary AND w1.worker_id != w2.worker_id;
+
+#36
+2nd HIGHESR SALARY 
+select MAX(salary) from worker WHERE salary NOT IN ( select MAX(salary) from worker);
+
+#38
+SUB-QUERY
+select * from worker WHERE worker_id NOT IN ( select worker_ref_id from bonus GROUP BY worker_ref_id );
+JOIN (minus)
+select * from worker as w LEFT JOIN bonus as b ON w.worker_id = b.worker_ref_id WHERE b.worker_ref_id is null;
+
+#39
+50%
+select * from worker WHERE worker_id <= ( select COUNT(worker_id) / 2 from worker );
+
+#40
+OCCURRENCE
+select department, count(department) as dep_count from worker GROUP BY departemnt HAVING dep_count < 4;
+
+#41
+OCCURENCE
+select departemnt, count(department) as dep_count from worker GROUP BY department;
+
+#42
+LAST RECORD
+select * from worker WHERE worker_id = ( select MAX(worker_id) from worker );
+
+#43
+LAST 5 RECORDS 
+select * from worker ORDER BY worker_id DESC LIMIT 5;
+
+#44
+select w.department, w.first_name, w.salary from 
+(select department, MAX(salary) as max_salary from worker GROUP BY department) AS temp
+INNER JOIN worker as w ON w.department = temp.department and w.salary = temp.max_salary;
+
+#49
+DEPARTMENT , TOTAL SALARY
+select department, sum(salary) from worker GROUP BY department;
+
+#51
+REMOVE REVERSED PAIRS
+select lt.* form pairs lt LEFT JOIN pairs rt ON lt.A = rt.B and lt.B = rt.A WHERE rt.A = null OR lt.A < rt.A;
+
+#JOINS
+    1. Joins are used to fetch data from more than 1 table using relation.
+
+    2. To apply join we must have COMMON COLUMN in tables.
+
+    #INNER JOIN
+        1. Inner join returns the RECORDS whose keys are common in BOTH TABLES.
+
+        2. syntax
+
+            select <column-list> FROM t1 INNER JOIN t1 ON <condition>
+
+    #OUTER JOIN 
+
+        #LEFT JOIN 
+
+            1. Left join returns RECORDS whose keys are common in BOTH TABLES(same as inner join) but also records from LEFT TABLE.
+
+            2. The keys which are not presented in RIGHT table , their RECORDS are NULL.
+
+            3. syntax 
+
+                select <column-list> FROM t1 LEFT JOIN t2 ON <condtion>
+
+        #RIGHT JOIN
+
+            1. Right join returns RECORDS whose keys are common in BOTH TABLES(same as inner join) but also records from RIGHT TABLE.
+
+            2. The keys which are not presented in LEFT TABLE , their records are NULL.
+
+            3. syntax 
+
+                select <column-list> from t1 RIGHT JOIN t2 ON <condition>
+
+        #FULL JOIN 
+
+            1. Full Join is just getting data of both the tables (union of both the tables).
+
+            2. or Left join U Right join.
+
+            3. In mysql there is no DIRECT KEYWORD to apply FULL JOIN , for applying full join we use UNION keyword.
+
+            4. syntax 
+
+                select <column-list> FROM t1 LEFT JOIN t2 ON <condition> UNION select <column-list> FROM t1 RIGHT JOIN t2 ON <condition>
+
+        #SELF JOIN
+
+            1. In mysql there is no DIRECT KEYWORD to apply SELF JOIN , for applying self join we following things...
+
+                a - INNER JOIN
+
+                b - Aliasing 
+
+#SET OPERATIONS
+
+    1 - Set - Set is a collection of UNIQUE items.
+
+    2 - For performing set operations we must have same TYPE and NUMBER of columns.
+
+    3 - Set operations are applied only on ROWS.
+
+    4 - Set operations COMBINE two or more SELECT statements. 
+
+    5 - There are following set operations 
+
+        a - UNION.
+
+        b - INTERSACTION.
+
+        c - MINUS.
+
+        #UNION 
+
+            1 - COMBINING all records and make them appeared only ONCE.
+
+            2 - syntax 
+
+                select * from table1
+                UNION
+                select * from table2
+
+        #INTERSACT.
+
+            1 - Common Records.
+
+            2 - In mysql no keyword exist like INTERSACT.
+
+            3 - we need to emulatef it using INNER JOIN.
+
+            4 syntax 
+
+                select t1.* from t1 INNER JOIN t2 using(<key>);
+
+        #MINUS 
+
+            1. presenting a table after DOING MINUS of records of another table from this table.
+
+            2. syntax 
+
+                select t1.* from t1 LEFT JOIN t2 using(emp_id) WHERE t2.<key> is null;
+
+#DIFFERENCE BETWEEN JOIN AND SET 
+
+    1. Join Combines multiple table based on COMMON key , Set combines RECORDS of tables while maintaing UNIQUNESS.
+
+    2. Join - column wise combination , set - row wise combination.
+
+    3. In join DATA TYPE can be DIFFERENT , in Set DATA TYPE must be SAME.
+
+    4. Join generates DISTINCAT and DUPLICATE rows both , in Set only DISTINCT rows are generated.
+
+    5. In join NUMBER of columns can be SAME or DIFFERENT , In Set NUMBER of column MUST be same.
+
+    6. Join combines result HORIZONTALLY , Set combines result VERTICALLY.
+
+#SUB QUERIES
+
+    1. SUB QUERY is an alternative of JOINS.
+
+    2. It looks like 
+
+        Q1 ( Q2 )
+
+        Where Q1 is OUTER query and Q2 is inner query.
+
+        Generally OUTER query depends on INNER query
+
+        At first Q2 (inner) is executed and generates OUTPUT and on this output Q1 (outer) is executed.
+
+    3. ex 
+
+        select * from employee where id IN ( select id from employee where age > 30 );
+
+        select * from employee where id IN ( select emp_id from project GROUP BY emp_id HAVING count > 1 );
+
+#DIFFERENCE BWTEEN JOIN AND SUB-QUERY 
+
+    1. Join operation is FATSER and Sub-query operation is SLOWER.
+
+    2. In join operations DBMS is responsible to execite joins effeciently but in Sub-query this is responsibility of USER.
+
+    3. Joins are COMPLEX in terms of UNDERSTANDING AND IMPLEMENTATION but Sub-queries are COMPARATIVELY EASIER.

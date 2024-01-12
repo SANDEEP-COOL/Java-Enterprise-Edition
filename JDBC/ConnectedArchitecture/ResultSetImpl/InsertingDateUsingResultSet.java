@@ -8,7 +8,6 @@ import java.util.Scanner;
 import java.text.ParseException;
 import java.sql.PreparedStatement;
 
-
 public class InsertingDateUsingResultSet {
     public static void main(String[] args) {
         
